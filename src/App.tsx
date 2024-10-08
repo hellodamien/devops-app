@@ -20,7 +20,7 @@ function App() {
       return;
     }
 
-    // TODO: enregistrer la tâche dans le local storage
+    // Enregistrer la tâche dans le local storage
     const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     tasks.push({ title, date });
     localStorage.setItem("tasks", JSON.stringify(tasks));
