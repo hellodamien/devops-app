@@ -35,29 +35,35 @@ function App() {
 
   return (
     <>
+      <h1 className="text-center text-3xl font-bold text-violet-900 mt-12">
+        Cahier de texte
+      </h1>
       <form
-        className="flex flex-col space-y-2 max-w-80 border p-6 shadow-lg mx-auto mt-12 rounded-md"
+        className="flex flex-col space-y-3 max-w-80 border-violet-200 border p-6 shadow-lg mx-auto mt-12 rounded-md"
         onSubmit={handleSubmit}
       >
         <input
           type="text"
-          className="border p-2"
+          className="border p-2 rounded-md"
           placeholder="Titre de la tâche"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
         <input
           type="date"
-          className="border p-2"
+          className="border p-2 rounded-md"
           onChange={(e) => setDate(e.target.value)}
           value={date}
         />
-        <button type="submit" className="bg-slate-200 p-2">
+        <button
+          type="submit"
+          className="bg-violet-200 p-2 rounded-md text-violet-900"
+        >
           Ajouter
         </button>
       </form>
       {message && (
-        <div className="text-green-400 p-2 text-center mt-2">{message}</div>
+        <div className="text-violet-400 p-2 text-center mt-2">{message}</div>
       )}
     </>
   );
