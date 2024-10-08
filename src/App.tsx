@@ -21,6 +21,9 @@ function App() {
     }
 
     // TODO: enregistrer la tâche dans le local storage
+    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    tasks.push({ title, date });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
     // Réinitialiser les champs
     setTitle("");
