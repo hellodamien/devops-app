@@ -38,7 +38,7 @@ function App() {
     setDate("");
 
     // Afficher un message de succès
-    setMessage("Tâche ajoutée avec succès !");
+    // setMessage("Tâche ajoutée avec succès !");
     setTimeout(() => {
       setMessage("");
     }, 3000);
