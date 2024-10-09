@@ -1,6 +1,12 @@
 import { useState } from "react";
-import "./App.css";
 import { TASKS_STORAGE_KEY } from "./config";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+
+import "./App.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+const localizer = momentLocalizer(moment);
 
 type Task = {
   title: string;
@@ -81,6 +87,16 @@ function App() {
       {message && (
         <div className="text-violet-400 p-2 text-center mt-2">{message}</div>
       )}
+      <div className="border-violet-200 border p-6 shadow-lg mx-auto max-w-5xl my-12 rounded-md">
+        <Calendar
+          localizer={localizer}
+          events={[]}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+          culture="fr-FR"
+        />
+      </div>
     </>
   );
 }
