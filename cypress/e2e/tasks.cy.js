@@ -2,7 +2,7 @@ import { TASKS_STORAGE_KEY } from "../../src/config";
 
 const taskToCreate = {
   title: "Titre de la tâche",
-  date: "2021-12-31",
+  date: new Date().toISOString().split("T")[0],
 };
 
 describe("Tasks features", () => {
@@ -25,6 +25,11 @@ describe("Tasks features", () => {
     // Check form has been reset
     cy.get("[data-cy='input-title']").should("have.value", "");
     cy.get("[data-cy='input-date']").should("have.value", "");
+
+    // New task is displayed in calendar
+    cy.get('.rbc-event-content[title="' + taskToCreate.title + '"]').should(
+      "exist"
+    );
   });
 
   it("can't add task without title", () => {
@@ -40,8 +45,13 @@ describe("Tasks features", () => {
 
     // Check local storage tasks is empty
     cy.getAllLocalStorage().then((ls) => {
-      expect(ls[Cypress.config().baseUrl]).to.be.undefined;
+      expect(ls[Cypress.config().baseUrl][TASKS_STORAGE_KEY]).to.be.equal("[]");
     });
+
+    // Check task is not displayed in calendar
+    cy.get('.rbc-event-content[title="' + taskToCreate.title + '"]').should(
+      "not.exist"
+    );
   });
 
   it("can't add task without date", () => {
@@ -57,7 +67,21 @@ describe("Tasks features", () => {
 
     // Check local storage tasks is empty
     cy.getAllLocalStorage().then((ls) => {
-      expect(ls[Cypress.config().baseUrl]).to.be.undefined;
+      expect(ls[Cypress.config().baseUrl][TASKS_STORAGE_KEY]).to.be.equal("[]");
     });
+
+    // Check task is not displayed in calendar
+    cy.get('.rbc-event-content[title="' + taskToCreate.title + '"]').should(
+      "not.exist"
+    );
+  });
+
+  it("previous tasks are displayed in calendar", () => {
+    cy.visit("/");
+    localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify([taskToCreate]));
+
+    cy.get('.rbc-event-content[title="' + taskToCreate.title + '"]').should(
+      "exist"
+    );
   });
 });
