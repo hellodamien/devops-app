@@ -53,7 +53,7 @@ function App() {
   return (
     <>
       <h1 className="text-center text-3xl font-bold text-violet-900 mt-12">
-        Cahier de texte (v2)
+        Cahier de texte
       </h1>
       <form
         className="flex flex-col space-y-3 max-w-80 border-violet-200 border p-6 shadow-lg mx-auto mt-12 rounded-md"
